@@ -15,6 +15,7 @@ conda activate EvaGeM
 Then `git clone` this repository in your preferred path:
 ```
 git clone https://github.com/nicolassalvy/EvaGeM.git
+cd EvaGeM
 pip install -e .
 ```
 
