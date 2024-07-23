@@ -12,7 +12,7 @@ conda create -n EvaGeM python=3.10
 conda activate EvaGeM
 ```
 
-Then `git clone ` this repository in your preferred path:
+Then `git clone` this repository in your preferred path:
 ```
 git clone https://github.com/nicolassalvy/EvaGeM.git
 pip install -e .
@@ -38,10 +38,10 @@ Please refer to `tutorial.ipynb` for detailed instructions on using the package.
 ## Metrics
 
 We evaluate 4 aspects of the generated data:
-— **Quality**: How well the generated data approximates the desired output.
-— **Coverage**: The extent to which the generated data covers the entire underlying data distribution.
-— **Conditionality**: The model's ability to produce samples belonging to specific classes or attributes.
-— **Generalisation**: The distinctiveness of the generated samples compared to the training data, discerning potential overfitting.
+- **Quality**: How well the generated data approximates the desired output.
+- **Coverage**: The extent to which the generated data covers the entire underlying data distribution.
+- **Conditionality**: The model's ability to produce samples belonging to specific classes or attributes.
+- **Generalisation**: The distinctiveness of the generated samples compared to the training data, discerning potential overfitting.
 
 ### List of Measures and their Evaluated aspects:
 
