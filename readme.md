@@ -57,9 +57,9 @@ We evaluate 4 aspects of the generated data:
 | Identifiability | | | :heavy_check_mark: | |
 | Histogram of distances | | :heavy_check_mark: | :heavy_check_mark: | |
 
-The [$\alpha$-Precision](https://arxiv.org/abs/2102.08921) metric measures the fidelity to the real data and how typical each generated sample is (**do the generated samples come from the initial distribution?**), in $[0,1]$ (higher is better).
+The [α-Precision](https://arxiv.org/abs/2102.08921) metric measures the fidelity to the real data and how typical each generated sample is (**do the generated samples come from the initial distribution?**), in $[0,1]$ (higher is better).
 
-The [$\beta$-Recall](https://arxiv.org/abs/2102.08921) metric measures the **coverage**, in $[0,1]$ (higher is better).
+The [β-Recall](https://arxiv.org/abs/2102.08921) metric measures the **coverage**, in $[0,1]$ (higher is better).
 
 They are usually used with the authenticity metric, that was introduced in the same paper to measure generalisation. However, as in [here](https://arxiv.org/abs/2310.09656) we found that the $\beta$-Recall and Authenticity metrics were usually very (negatively) correlated. 
 
