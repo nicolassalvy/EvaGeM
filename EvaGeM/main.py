@@ -110,9 +110,9 @@ def main(
             GAN-train should be computed. Defaults to False.
         compute_classif_based_GAN_test (bool, optional): Decides if
             GAN-test should be computed. Defaults to False.
-        compute_classif_based_data_augmentation (bool, optional):
-            Decides if the model should also be evaluated as a data
-            augmentation model. Defaults to False.
+        compute_classif_based_data_augmentation (bool, optional): Decides if
+            the model should also be evaluated as a data augmentation model.
+            Defaults to False.
         compute_classif_based_discriminator (bool, optional): Decides
             if the discriminator score should be computed. Defaults to False.
 
