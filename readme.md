@@ -26,6 +26,8 @@ PyTorch is needed for the tutorial (both `torch` and `torchvision`) and is not c
 
 Please refer to `tutorial.ipynb` for detailed instructions on using the package.
 
+[Documentation](https://nicolassalvy.github.io/EvaGeM/) is available.
+
 ### General guidelines:
 - **Standardize your data**: Your data should be standardized or preprocessed in the same way it was given to your generative model. Otherwise, the metrics might be biased.
 
