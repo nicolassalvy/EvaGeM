@@ -13,9 +13,10 @@ def distance_histogram(
     dataset_name="Default_dataset_name",
     reusable_path=None,
 ):
-    """Compute and saves the histogram of the shortest distance between any
-    initial data and other initial datas. Computes and saves the histogram
-    of the shortest distance between any generated data and the initial datas.
+    """Computes and saves the histogram of the shortest distance between any
+    initial data point and other initial data points. Computes and saves the
+    histogram of the shortest distance between any generated data point and the
+    initial data points.
 
     Args:
         train_data (np.array): the training data.
