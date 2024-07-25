@@ -41,89 +41,89 @@ hljs.highlightAll();
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>train_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the training data.</dd>
+<dd>The training data.</dd>
 <dt><strong><code>eval_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the evaluation data.</dd>
+<dd>The evaluation data.</dd>
 <dt><strong><code>test_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the test data.</dd>
+<dd>The test data.</dd>
 <dt><strong><code>generated_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the generated data.</dd>
+<dd>The generated data.</dd>
 <dt><strong><code>train_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>training labels. Defaults to None.</dd>
+<dd>Training labels. Defaults to None.</dd>
 <dt><strong><code>test_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>test labels. Defaults to None.</dd>
+<dd>Test labels. Defaults to None.</dd>
 <dt><strong><code>generated_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>generated labels. Defaults to
+<dd>Generated labels. Defaults to
 None.</dd>
 <dt><strong><code>classes</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>name of the classes. Defaults to None.</dd>
-<dt><strong><code>scaler</code></strong> :&ensp;<code>sklearn compatible scaler</code></dt>
-<dd>The sklearn scaler used to scale
-the data. If provided, it is used to unscale the data before
-plotting UMAPs. Defaults to None.</dd>
+<dd>Names of the classes. Defaults to None.</dd>
+<dt><strong><code>scaler</code></strong> :&ensp;<code>sklearn compatible scaler</code>, optional</dt>
+<dd>The sklearn scaler used
+to scale the data. If provided, it is used to unscale the data
+before plotting UMAPs. Defaults to None.</dd>
 <dt><strong><code>res_save_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>path of the directory where the results
+<dd>Path of the directory where the results
 will be saved. If it is not provided, the results are printed and
 returned but not saved. Defaults to None.</dd>
 <dt><strong><code>experiment_name</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>name of the experiment. Used to save
-the results of different experiments in the same csv file, and to
+<dd>Name of the experiment. Used to save
+the results of different experiments in the same CSV file, and to
 save the plots in different directories. Defaults to
 "Default_experiment_name".</dd>
 <dt><strong><code>compute_UMAP_top</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the plot of the generated
+<dd>Decides if the plot of the generated
 data projected onto the UMAP of the real data should be computed.
 Defaults to True.</dd>
 <dt><strong><code>compute_UMAP_together</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the plot of the
+<dd>Decides if the plot of the
 UMAP computed from the real data and the generated data together
 should be computed. Defaults to True.</dd>
 <dt><strong><code>compute_UMAP_centroids</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if another plot of the
-UMAPs computed should be shown with the Centroids of each class.
+<dd>Decides if another plot of the
+UMAPs computed should be shown with the centroids of each class.
 Defaults to True.</dd>
 <dt><strong><code>compute_distribution_based_alpha</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the
+<dd>Decides if the
 distribution-based alpha-precision metric should be computed.
 Defaults to True.</dd>
 <dt><strong><code>compute_distribution_based_beta</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the
+<dd>Decides if the
 distribution-based beta-recall metric should be computed.
 Defaults to True.</dd>
 <dt><strong><code>compute_distribution_based_authenticity</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if
+<dd>Decides if
 the distribution-based authenticity metric should be computed.
 Defaults to False.</dd>
 <dt><strong><code>compute_distribution_based_identifiability</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if
+<dd>Decides if
 the distribution-based identifiability metric should be computed.
 Defaults to True.</dd>
 <dt><strong><code>compute_distribution_based_distance_histogram</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides
+<dd>Decides
 if the histogram of distances is computed. Defaults to True.</dd>
 <dt><strong><code>compute_classif_based_GAN_train</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides if
-GAN-train should be computed. Defaults to False.</dd>
+GAN-train should be computed. Defaults to True.</dd>
 <dt><strong><code>compute_classif_based_GAN_test</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides if
-GAN-test should be computed. Defaults to False.</dd>
+GAN-test should be computed. Defaults to True.</dd>
 <dt><strong><code>compute_classif_based_data_augmentation</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides if
 the model should also be evaluated as a data augmentation model.
-Defaults to False.</dd>
+Defaults to True.</dd>
 <dt><strong><code>compute_classif_based_discriminator</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides
-if the discriminator score should be computed. Defaults to False.</dd>
+if the discriminator score should be computed. Defaults to True.</dd>
 <dt><strong><code>reusable_embeddings</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides if the UMAP embedding and
-the histogram of distances of the real data are computed everytime
+the histogram of distances of the real data are computed every time
 (False) or if they can be saved and loaded (True). Useful if you
 want to test different generated datasets from the same real data.
 It is only used if a dataset_name is provided to avoid mistakes.
 Defaults to True.</dd>
 <dt><strong><code>reusable_classif_baseline</code></strong> :&ensp;<code>bool</code>, optional</dt>
 <dd>Decides if the
-classification baseline is computed everytime (False) or if it can
+classification baseline is computed every time (False) or if it can
 be saved and loaded (True). Useful if you want to test different
 generated datasets for the same real data. It is only used if a
 dataset_name is provided to avoid mistakes. Defaults to True.</dd>
@@ -147,13 +147,13 @@ to 50.</dd>
 leaked proportion for the distribution-based metric
 identifiability. The proportion of points in the reference real
 data (eval_data) that can be considered as leaked in the
-train_data. There is no real leakage, it is the reference value of
+train_data. There is no real leakage; it is the reference value of
 what can be considered normal. Defaults to 0.05.</dd>
 <dt><strong><code>distribution_based_n_jobs</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>Number of jobs to use for
 the distribution-based metrics. Defaults to 2.</dd>
 <dt><strong><code>classifiers</code></strong> :&ensp;<code>list</code>, optional</dt>
-<dd>List of sklearn compatible classifiers
+<dd>List of sklearn-compatible classifiers
 to instantiate for the classification-based metrics. Defaults to
 [MLPClassifier, XGBClassifier].</dd>
 <dt><strong><code>classifier_params</code></strong> :&ensp;<code>list</code>, optional</dt>
@@ -165,17 +165,17 @@ Defaults to [{"max_iter": 10}, {"n_estimators": 10}].</dd>
 decides if the data should be flattened before training the
 classifier. Defaults to [True, True].</dd>
 </dl>
-<p>Returns a dictionnary with the following keys:
-Min (float): min of the generated data.
-Max (float): max of the generated data.
-DPA (float): alpha-Precision metric.
-DCB (float): beta-Recall metric.
-authenticity (float): authenticity metric.
-identifiability (float): identifiability metric.
-GAN_train (float): GAN train accuracy.
-GAN_test (float): GAN test accuracy.
-data_augmentation (float): data augmentation accuracy.
-discriminator (float): discriminator accuracy.</p></div>
+<p>Returns: dict: A dictionnary with the following keys:
+- Min (float): Min of the generated data.
+- Max (float): Max of the generated data.
+- DPA (float): Alpha-Precision metric.
+- DCB (float): Beta-Recall metric.
+- authenticity (float): Authenticity metric.
+- identifiability (float): Identifiability metric.
+- GAN_train (float): GAN train accuracy.
+- GAN_test (float): GAN test accuracy.
+- data_augmentation (float): Data augmentation accuracy.
+- discriminator (float): Discriminator accuracy.</p></div>
 </dd>
 <dt id="EvaGeM.main.round_with_None"><code class="name flex">
 <span>def <span class="ident">round_with_None</span></span>(<span>value, n)</span>

@@ -51,21 +51,21 @@ Defaults to None.</dd>
 <dd>Filtered generated labels.
 Defaults to None.</dd>
 <dt><strong><code>classes</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>name of the classes. Defaults to None.</dd>
+<dd>Names of the classes. Defaults to None.</dd>
 <dt><strong><code>scaler</code></strong> :&ensp;<code>sklearn compatible scaler</code></dt>
 <dd>The sklearn scaler used to scale
 the data. If provided, it is used to unscale the data before
 plotting UMAPs. Defaults to None.</dd>
 <dt><strong><code>res_save_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>path of the directory where the results
+<dd>Path of the directory where the results
 will be saved. If it is not provided, the results are printed and
 returned but not saved. Defaults to None.</dd>
 <dt><strong><code>experiment_name</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>name of the experiment. Used to save
+<dd>Name of the experiment. Used to save
 the results of different experiments in the same csv file.
 Defaults to "Default_experiment_name".</dd>
 <dt><strong><code>compute_UMAP_centroids</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if another plot of the
+<dd>Decides if another plot of the
 UMAPs computed should be shown with the Centroids of each class.
 Defaults to True.</dd>
 <dt><strong><code>reusable_UMAP_embedding</code></strong> :&ensp;<code>bool</code>, optional</dt>
@@ -98,15 +98,15 @@ keeping the same proportion of data from each class as in the labels.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>generated_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>generated data.</dd>
+<dd>Generated data.</dd>
 <dt><strong><code>train_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>training data.
+<dd>Training data.
 If train_data is a np.array, then the class of the initial
 data is not used.</dd>
 <dt><strong><code>train_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>training labels. Defaults to None.</dd>
+<dd>Training labels. Defaults to None.</dd>
 <dt><strong><code>generated_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>generated labels. Defaults to
+<dd>Generated labels. Defaults to
 None.</dd>
 <dt><strong><code>UMAP_limit</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>Limit of the number of points to plot in
@@ -129,38 +129,38 @@ data to plot if there is too much.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>train_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the training data.</dd>
+<dd>The training data.</dd>
 <dt><strong><code>generated_data</code></strong> :&ensp;<code>np.array</code></dt>
-<dd>the generated data.</dd>
+<dd>The generated data.</dd>
 <dt><strong><code>train_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>training labels. Defaults to None.</dd>
+<dd>Training labels. Defaults to None.</dd>
 <dt><strong><code>generated_labels</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>generated labels. Defaults to
+<dd>Generated labels. Defaults to
 None.</dd>
 <dt><strong><code>classes</code></strong> :&ensp;<code>np.array</code>, optional</dt>
-<dd>name of the classes. Defaults to None.</dd>
+<dd>Names of the classes. Defaults to None.</dd>
 <dt><strong><code>scaler</code></strong> :&ensp;<code>sklearn compatible scaler</code></dt>
 <dd>The sklearn scaler used to scale
 the data. If provided, it is used to unscale the data before
 plotting UMAPs. Defaults to None.</dd>
 <dt><strong><code>res_save_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>path of the directory where the results
+<dd>Path of the directory where the results
 will be saved. If it is not provided, the results are printed and
 returned but not saved. Defaults to None.</dd>
 <dt><strong><code>experiment_name</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>name of the experiment. Used to save
+<dd>Name of the experiment. Used to save
 the results of different experiments in the same csv file.
 Defaults to "Default_experiment_name".</dd>
 <dt><strong><code>compute_UMAP_top</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the plot of the generated
+<dd>Decides if the plot of the generated
 data projected onto the UMAP of the real data should be computed.
 Defaults to True.</dd>
 <dt><strong><code>compute_UMAP_together</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if the plot of the
+<dd>Decides if the plot of the
 UMAP computed from the real data and the generated data together
 should be computed. Defaults to True.</dd>
 <dt><strong><code>compute_UMAP_centroids</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>decides if another plot of the
+<dd>Decides if another plot of the
 UMAPs computed should be shown with the Centroids of each class.
 Defaults to True.</dd>
 <dt><strong><code>reusable_UMAP_embedding</code></strong> :&ensp;<code>bool</code>, optional</dt>
