@@ -89,23 +89,23 @@ def classification_scores(
         should have the same number of samples.
 
     Args:
-        train_data (np.array): the training data.
-        test_data (np.array): the test data.
-        generated_data (np.array): the generated data.
+        train_data (np.array): The training data.
+        test_data (np.array): The test data.
+        generated_data (np.array): The generated data.
 
-        train_labels (np.array, optional): training labels. Defaults to None.
-        test_labels (np.array, optional): test labels. Defaults to None.
-        generated_labels (np.array, optional): generated labels. Defaults to
+        train_labels (np.array, optional): Training labels. Defaults to None.
+        test_labels (np.array, optional): Test labels. Defaults to None.
+        generated_labels (np.array, optional): Generated labels. Defaults to
             None.
 
         compute_GAN_train (bool, optional): Decides if GAN-train should be
-            computed. Defaults to False.
+            computed. Defaults to True.
         compute_GAN_test (bool, optional): Decides if GAN-test should be
-            computed. Defaults to False.
+            computed. Defaults to True.
         compute_data_augmentation (bool, optional): Decides if the model should
-            also be evaluated as a data augmentation model. Defaults to False.
+            also be evaluated as a data augmentation model. Defaults to True.
         compute_discriminator (bool, optional): Decides if the discriminator
-            score should be computed. Defaults to False.
+            score should be computed. Defaults to True.
 
         reusable_baseline (bool, optional): Decides if the baseline is computed
             everytime (False) or if it can be saved and loaded (True). Useful
@@ -127,12 +127,12 @@ def classification_scores(
             classifier. Defaults to [True, True].
 
     Returns:
-        A dictionary with the following keys:
-        - baseline: accuracy of the baseline classifier.
-        - GAN_train: accuracy of the GAN-train classifier.
-        - GAN_test: accuracy of the GAN-test classifier.
-        - DA: accuracy of the data augmentation classifier.
-        - discriminator: accuracy of the discriminator classifier.
+        dict: A dictionary with the following keys:
+        - baseline (float): Accuracy of the baseline classifier.
+        - GAN_train (float): Accuracy of the GAN-train classifier.
+        - GAN_test (float): Accuracy of the GAN-test classifier.
+        - DA (float): Accuracy of the data augmentation classifier.
+        - discriminator (float): Accuracy of the discriminator classifier.
     """
     classification_results = {
         "baseline": 0,

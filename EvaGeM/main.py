@@ -56,74 +56,75 @@ def main(
     classifier_params=[{"max_iter": 10}, {"n_estimators": 10}],
     classifiers_should_flatten=[True, True],
 ):
-    """Evaluate the generated data.
+    """
+    Evaluate the generated data.
 
     Args:
-        train_data (np.array): the training data.
-        eval_data (np.array): the evaluation data.
-        test_data (np.array): the test data.
-        generated_data (np.array): the generated data.
+        train_data (np.array): The training data.
+        eval_data (np.array): The evaluation data.
+        test_data (np.array): The test data.
+        generated_data (np.array): The generated data.
 
-        train_labels (np.array, optional): training labels. Defaults to None.
-        test_labels (np.array, optional): test labels. Defaults to None.
-        generated_labels (np.array, optional): generated labels. Defaults to
+        train_labels (np.array, optional): Training labels. Defaults to None.
+        test_labels (np.array, optional): Test labels. Defaults to None.
+        generated_labels (np.array, optional): Generated labels. Defaults to
             None.
-        classes (np.array, optional): name of the classes. Defaults to None.
+        classes (np.array, optional): Names of the classes. Defaults to None.
 
-        scaler (sklearn compatible scaler): The sklearn scaler used to scale
-            the data. If provided, it is used to unscale the data before
-            plotting UMAPs. Defaults to None.
-        res_save_dir (str, optional): path of the directory where the results
+        scaler (sklearn compatible scaler, optional): The sklearn scaler used
+            to scale the data. If provided, it is used to unscale the data
+            before plotting UMAPs. Defaults to None.
+        res_save_dir (str, optional): Path of the directory where the results
             will be saved. If it is not provided, the results are printed and
             returned but not saved. Defaults to None.
-        experiment_name (str, optional): name of the experiment. Used to save
-            the results of different experiments in the same csv file, and to
+        experiment_name (str, optional): Name of the experiment. Used to save
+            the results of different experiments in the same CSV file, and to
             save the plots in different directories. Defaults to
             "Default_experiment_name".
 
-        compute_UMAP_top (bool, optional): decides if the plot of the generated
+        compute_UMAP_top (bool, optional): Decides if the plot of the generated
             data projected onto the UMAP of the real data should be computed.
             Defaults to True.
-        compute_UMAP_together (bool, optional): decides if the plot of the
+        compute_UMAP_together (bool, optional): Decides if the plot of the
             UMAP computed from the real data and the generated data together
             should be computed. Defaults to True.
-        compute_UMAP_centroids (bool, optional): decides if another plot of the
-            UMAPs computed should be shown with the Centroids of each class.
+        compute_UMAP_centroids (bool, optional): Decides if another plot of the
+            UMAPs computed should be shown with the centroids of each class.
             Defaults to True.
 
-        compute_distribution_based_alpha (bool, optional): decides if the
+        compute_distribution_based_alpha (bool, optional): Decides if the
             distribution-based alpha-precision metric should be computed.
             Defaults to True.
-        compute_distribution_based_beta (bool, optional): decides if the
+        compute_distribution_based_beta (bool, optional): Decides if the
             distribution-based beta-recall metric should be computed.
             Defaults to True.
-        compute_distribution_based_authenticity (bool, optional): decides if
+        compute_distribution_based_authenticity (bool, optional): Decides if
             the distribution-based authenticity metric should be computed.
             Defaults to False.
-        compute_distribution_based_identifiability (bool, optional): decides if
+        compute_distribution_based_identifiability (bool, optional): Decides if
             the distribution-based identifiability metric should be computed.
             Defaults to True.
-        compute_distribution_based_distance_histogram (bool, optional): decides
+        compute_distribution_based_distance_histogram (bool, optional): Decides
             if the histogram of distances is computed. Defaults to True.
 
         compute_classif_based_GAN_train (bool, optional): Decides if
-            GAN-train should be computed. Defaults to False.
+            GAN-train should be computed. Defaults to True.
         compute_classif_based_GAN_test (bool, optional): Decides if
-            GAN-test should be computed. Defaults to False.
+            GAN-test should be computed. Defaults to True.
         compute_classif_based_data_augmentation (bool, optional): Decides if
             the model should also be evaluated as a data augmentation model.
-            Defaults to False.
+            Defaults to True.
         compute_classif_based_discriminator (bool, optional): Decides
-            if the discriminator score should be computed. Defaults to False.
+            if the discriminator score should be computed. Defaults to True.
 
         reusable_embeddings (bool, optional): Decides if the UMAP embedding and
-            the histogram of distances of the real data are computed everytime
+            the histogram of distances of the real data are computed every time
             (False) or if they can be saved and loaded (True). Useful if you
             want to test different generated datasets from the same real data.
             It is only used if a dataset_name is provided to avoid mistakes.
             Defaults to True.
         reusable_classif_baseline (bool, optional): Decides if the
-            classification baseline is computed everytime (False) or if it can
+            classification baseline is computed every time (False) or if it can
             be saved and loaded (True). Useful if you want to test different
             generated datasets for the same real data. It is only used if a
             dataset_name is provided to avoid mistakes. Defaults to True.
@@ -143,11 +144,11 @@ def main(
             leaked proportion for the distribution-based metric
             identifiability. The proportion of points in the reference real
             data (eval_data) that can be considered as leaked in the
-            train_data. There is no real leakage, it is the reference value of
+            train_data. There is no real leakage; it is the reference value of
             what can be considered normal. Defaults to 0.05.
         distribution_based_n_jobs (int, optional): Number of jobs to use for
             the distribution-based metrics. Defaults to 2.
-        classifiers (list, optional): List of sklearn compatible classifiers
+        classifiers (list, optional): List of sklearn-compatible classifiers
             to instantiate for the classification-based metrics. Defaults to
             [MLPClassifier, XGBClassifier].
         classifier_params (list, optional): List of dictionaries with the
@@ -157,17 +158,17 @@ def main(
             decides if the data should be flattened before training the
             classifier. Defaults to [True, True].
 
-    Returns a dictionnary with the following keys:
-        Min (float): min of the generated data.
-        Max (float): max of the generated data.
-        DPA (float): alpha-Precision metric.
-        DCB (float): beta-Recall metric.
-        authenticity (float): authenticity metric.
-        identifiability (float): identifiability metric.
-        GAN_train (float): GAN train accuracy.
-        GAN_test (float): GAN test accuracy.
-        data_augmentation (float): data augmentation accuracy.
-        discriminator (float): discriminator accuracy.
+    Returns: dict: A dictionnary with the following keys:
+        - Min (float): Min of the generated data.
+        - Max (float): Max of the generated data.
+        - DPA (float): Alpha-Precision metric.
+        - DCB (float): Beta-Recall metric.
+        - authenticity (float): Authenticity metric.
+        - identifiability (float): Identifiability metric.
+        - GAN_train (float): GAN train accuracy.
+        - GAN_test (float): GAN test accuracy.
+        - data_augmentation (float): Data augmentation accuracy.
+        - discriminator (float): Discriminator accuracy.
     """
     results = {
         "alpha-precision": None,

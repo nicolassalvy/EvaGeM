@@ -19,12 +19,12 @@ def distance_histogram(
     initial data points.
 
     Args:
-        train_data (np.array): the training data.
-        generated_data (np.array): the generated data.
-        res_save_dir (str, optional): path of the directory where the results
+        train_data (np.array): The training data.
+        generated_data (np.array): The generated data.
+        res_save_dir (str, optional): Path of the directory where the results
             will be saved. If it is not provided, the results are printed and
             returned but not saved. Defaults to None.
-        experiment_name (str, optional): name of the experiment. Used to save
+        experiment_name (str, optional): Name of the experiment. Used to save
             the results of different experiments in the same csv file.
             Defaults to "Default_experiment_name".
         reusable_histogram_embedding (bool, optional): Decides if the histogram

@@ -18,12 +18,12 @@ def prepare_plots(
         keeping the same proportion of data from each class as in the labels.
 
     Args:
-        generated_data (np.array): generated data.
-        train_data (np.array): training data.
+        generated_data (np.array): Generated data.
+        train_data (np.array): Training data.
             If train_data is a np.array, then the class of the initial
             data is not used.
-        train_labels (np.array, optional): training labels. Defaults to None.
-        generated_labels (np.array, optional): generated labels. Defaults to
+        train_labels (np.array, optional): Training labels. Defaults to None.
+        generated_labels (np.array, optional): Generated labels. Defaults to
             None.
         UMAP_limit (int, optional): Limit of the number of points to plot in
             the UMAPs (the total amount can go up to 2 times UMAP_limit, one
@@ -113,17 +113,17 @@ def plot_umap(
             Defaults to None.
         gen_labels_to_plot (np.array, optional): Filtered generated labels.
             Defaults to None.
-        classes (np.array, optional): name of the classes. Defaults to None.
+        classes (np.array, optional): Names of the classes. Defaults to None.
         scaler (sklearn compatible scaler): The sklearn scaler used to scale
             the data. If provided, it is used to unscale the data before
             plotting UMAPs. Defaults to None.
-        res_save_dir (str, optional): path of the directory where the results
+        res_save_dir (str, optional): Path of the directory where the results
             will be saved. If it is not provided, the results are printed and
             returned but not saved. Defaults to None.
-        experiment_name (str, optional): name of the experiment. Used to save
+        experiment_name (str, optional): Name of the experiment. Used to save
             the results of different experiments in the same csv file.
             Defaults to "Default_experiment_name".
-        compute_UMAP_centroids (bool, optional): decides if another plot of the
+        compute_UMAP_centroids (bool, optional): Decides if another plot of the
             UMAPs computed should be shown with the Centroids of each class.
             Defaults to True.
         reusable_UMAP_embedding (bool, optional): Decides if the UMAP embedding
@@ -448,32 +448,32 @@ def umaps(
         data to plot if there is too much.
 
     Args:
-        train_data (np.array): the training data.
-        generated_data (np.array): the generated data.
+        train_data (np.array): The training data.
+        generated_data (np.array): The generated data.
 
-        train_labels (np.array, optional): training labels. Defaults to None.
-        generated_labels (np.array, optional): generated labels. Defaults to
+        train_labels (np.array, optional): Training labels. Defaults to None.
+        generated_labels (np.array, optional): Generated labels. Defaults to
             None.
 
-        classes (np.array, optional): name of the classes. Defaults to None.
+        classes (np.array, optional): Names of the classes. Defaults to None.
         scaler (sklearn compatible scaler): The sklearn scaler used to scale
             the data. If provided, it is used to unscale the data before
             plotting UMAPs. Defaults to None.
 
-        res_save_dir (str, optional): path of the directory where the results
+        res_save_dir (str, optional): Path of the directory where the results
             will be saved. If it is not provided, the results are printed and
             returned but not saved. Defaults to None.
-        experiment_name (str, optional): name of the experiment. Used to save
+        experiment_name (str, optional): Name of the experiment. Used to save
             the results of different experiments in the same csv file.
             Defaults to "Default_experiment_name".
 
-        compute_UMAP_top (bool, optional): decides if the plot of the generated
+        compute_UMAP_top (bool, optional): Decides if the plot of the generated
             data projected onto the UMAP of the real data should be computed.
             Defaults to True.
-        compute_UMAP_together (bool, optional): decides if the plot of the
+        compute_UMAP_together (bool, optional): Decides if the plot of the
             UMAP computed from the real data and the generated data together
             should be computed. Defaults to True.
-        compute_UMAP_centroids (bool, optional): decides if another plot of the
+        compute_UMAP_centroids (bool, optional): Decides if another plot of the
             UMAPs computed should be shown with the Centroids of each class.
             Defaults to True.
 
