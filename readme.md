@@ -33,7 +33,7 @@ Please refer to `tutorial.ipynb` for detailed instructions on using the package.
 
 - **Data splitting**: Split your real data in a training, evaluation and test dataset. The generative model should have never seen the test dataset. There should be as much data in the train and generated datasets. The evaluation dataset is only used as a reference dataset for the identifiability metric.
 
-- If your date belongs to different classes:
+- If your data belongs to different classes:
     - Provide labels as one-hot encodings.
     - Class names should be given as a NumPy array of strings (input "classes").
 
