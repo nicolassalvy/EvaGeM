@@ -63,7 +63,7 @@ The [β-Recall](https://arxiv.org/abs/2102.08921) metric measures the **coverage
 
 They are usually used with the authenticity metric, that was introduced in the same paper to measure generalisation. However, as in [here](https://arxiv.org/abs/2310.09656) we found that the $\beta$-Recall and Authenticity metrics were usually very (negatively) correlated. 
 
-Instead, we use a modified version of the [Identifiability](https://ieeexplore.ieee.org/ielaam/6221020/9159696/9034117-aam.pdf?tag=1) metric. It measures the **proportion of real data leaked by the generated data**. Our version uses a reference real dataset for calibration, so that a given percentage (default 5%) of identifiability can be considered normal.
+Instead, we use a modified version of the [Identifiability](https://ieeexplore.ieee.org/abstract/document/9034117) metric. It measures the **proportion of real data leaked by the generated data**. Our version uses a reference real dataset for calibration, so that a given percentage (default 5%) of identifiability can be considered normal.
 
 The **Histogram of distances** is a visualisation of the histogram of distances from each real data point to its closest real data point and the histogram of distances from each generated point to its closest real data point. If the generated data follows the same distribution as the initial data, those two histograms should match.
 
