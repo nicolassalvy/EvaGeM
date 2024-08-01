@@ -37,10 +37,8 @@ hljs.highlightAll();
 <span>def <span class="ident">histograms</span></span>(<span>train_data, generated_data, test_data=None, res_save_dir=None, experiment_name='Default_experiment_name', compute_distance_histogram=True, compute_DCR=True, reusable_histogram_embedding=True, dataset_name='Default_dataset_name', reusable_path=None)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Computes and saves the histogram of the shortest distance between any
-initial data point and other initial data points. Computes and saves the
-histogram of the shortest distance between any generated data point and the
-initial data points.</p>
+<div class="desc"><p>Computes (and saves) the histogram of distances, the histogram of DCR
+and computes their associated scores.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>train_data</code></strong> :&ensp;<code>np.array</code></dt>
