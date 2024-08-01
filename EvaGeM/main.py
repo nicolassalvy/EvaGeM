@@ -8,9 +8,7 @@ from xgboost import XGBClassifier
 
 from .umaps import umaps
 
-from .distance_histogram import (
-    distance_histogram,
-)
+from .histograms import histograms
 from .classification_based import classification_scores
 from .distribution_based import (
     alpha_precision,
@@ -35,11 +33,12 @@ def main(
     compute_UMAP_top=True,
     compute_UMAP_together=True,
     compute_UMAP_centroids=True,
-    compute_distribution_based_alpha=True,
-    compute_distribution_based_beta=True,
-    compute_distribution_based_authenticity=False,
-    compute_distribution_based_identifiability=True,
-    compute_distribution_based_distance_histogram=True,
+    compute_distrib_based_alpha=True,
+    compute_distrib_based_beta=True,
+    compute_distrib_based_authenticity=False,
+    compute_distrib_based_identifiability=True,
+    compute_distrib_based_distance_histogram=True,
+    compute_distrib_based_DCR=True,
     compute_classif_based_GAN_train=True,
     compute_classif_based_GAN_test=True,
     compute_classif_based_data_augmentation=True,
@@ -49,9 +48,9 @@ def main(
     dataset_name="Default_dataset_name",
     reusable_path=None,
     UMAP_limit=2000,
-    distribution_based_metrics_n_evaluated_points=50,
+    distrib_based_metrics_n_evaluated_points=50,
     distrib_identif_ref_leaked_proportion=0.05,
-    distribution_based_n_jobs=2,
+    distrib_based_n_jobs=2,
     classifiers=[MLPClassifier, XGBClassifier],
     classifier_params=[{"max_iter": 10}, {"n_estimators": 10}],
     classifiers_should_flatten=[True, True],
@@ -92,21 +91,24 @@ def main(
             UMAPs computed should be shown with the centroids of each class.
             Defaults to True.
 
-        compute_distribution_based_alpha (bool, optional): Decides if the
+        compute_distrib_based_alpha (bool, optional): Decides if the
             distribution-based alpha-precision metric should be computed.
             Defaults to True.
-        compute_distribution_based_beta (bool, optional): Decides if the
+        compute_distrib_based_beta (bool, optional): Decides if the
             distribution-based beta-recall metric should be computed.
             Defaults to True.
-        compute_distribution_based_authenticity (bool, optional): Decides if
-            the distribution-based authenticity metric should be computed.
-            Defaults to False.
-        compute_distribution_based_identifiability (bool, optional): Decides if
-            the distribution-based identifiability metric should be computed.
+        compute_distrib_based_authenticity (bool, optional): Decides if the
+            distribution-based authenticity metric should be computed. Defaults
+            to False.
+        compute_distrib_based_identifiability (bool, optional): Decides if the
+            distribution-based identifiability metric should be computed.
             Defaults to True.
-        compute_distribution_based_distance_histogram (bool, optional): Decides
-            if the histogram of distances is computed. Defaults to True.
-
+        compute_distrib_based_distance_histogram (bool, optional): Decides if
+            the histogram of distances and its associated score should be
+            computed. Defaults to True.
+        compute_distrib_based_DCR (bool, optional): Decides if the
+            distribution-based Distance to Closest Records (DCR) histogram and
+            associated score should be computed. Defaults to True.
         compute_classif_based_GAN_train (bool, optional): Decides if
             GAN-train should be computed. Defaults to True.
         compute_classif_based_GAN_test (bool, optional): Decides if
@@ -137,17 +139,17 @@ def main(
             the UMAPs (the total amount can go up to 2 times UMAP_limit, one
             time for the real data, and another for the generated data).
             Defaults to 2000.
-        distribution_based_metrics_n_evaluated_points (int, optional): Number
-            of points to evaluate the distribution-based metrics on. Defaults
-            to 50.
+        distrib_based_metrics_n_evaluated_points (int, optional): Number of
+            points to evaluate the distribution-based metrics on. Defaults to
+            50.
         distrib_identif_ref_leaked_proportion (float, optional): The reference
             leaked proportion for the distribution-based metric
             identifiability. The proportion of points in the reference real
             data (eval_data) that can be considered as leaked in the
             train_data. There is no real leakage; it is the reference value of
             what can be considered normal. Defaults to 0.05.
-        distribution_based_n_jobs (int, optional): Number of jobs to use for
-            the distribution-based metrics. Defaults to 2.
+        distrib_based_n_jobs (int, optional): Number of jobs to use for the
+            distribution-based metrics. Defaults to 2.
         classifiers (list, optional): List of sklearn-compatible classifiers
             to instantiate for the classification-based metrics. Defaults to
             [MLPClassifier, XGBClassifier].
@@ -175,6 +177,8 @@ def main(
         "beta-recall": None,
         "authenticity": None,
         "identifiability": None,
+        "distance_score": None,
+        "DCR_score": None,
         "classification_baseline": None,
         "GAN_train": None,
         "GAN_test": None,
@@ -205,50 +209,59 @@ def main(
             UMAP_limit=UMAP_limit,
         )
 
-    if compute_distribution_based_distance_histogram:
-        distance_histogram(
+    if compute_distrib_based_distance_histogram or compute_distrib_based_DCR:
+        res_hist = histograms(
             train_data=train_data,
+            test_data=test_data,
             generated_data=generated_data,
             res_save_dir=res_save_dir,
             experiment_name=experiment_name,
+            compute_distance_histogram=compute_distrib_based_distance_histogram,
+            compute_DCR=compute_distrib_based_DCR,
             reusable_histogram_embedding=reusable_embeddings,
             dataset_name=dataset_name,
             reusable_path=reusable_path,
         )
+        if compute_distrib_based_distance_histogram:
+            results["distance_score"] = res_hist["distance_score"]
+            print("Distance score:", np.round(results["distance_score"], 4))
+        if compute_distrib_based_DCR:
+            results["DCR_score"] = res_hist["DCR_score"]
+            print("DCR score:", np.round(results["DCR_score"], 4))
 
-    if compute_distribution_based_alpha:
+    if compute_distrib_based_alpha:
         results["alpha-precision"] = alpha_precision(
             real_data=train_data,
             generated_data=generated_data,
-            number_of_alphas=distribution_based_metrics_n_evaluated_points,
-            n_jobs=distribution_based_n_jobs,
+            number_of_alphas=distrib_based_metrics_n_evaluated_points,
+            n_jobs=distrib_based_n_jobs,
         )
         print("Alpha-Precision:", np.round(results["alpha-precision"], 4))
 
-    if compute_distribution_based_beta:
+    if compute_distrib_based_beta:
         results["beta-recall"] = beta_recall(
             real_data=train_data,
             generated_data=generated_data,
-            number_of_betas=distribution_based_metrics_n_evaluated_points,
-            n_jobs=distribution_based_n_jobs,
+            number_of_betas=distrib_based_metrics_n_evaluated_points,
+            n_jobs=distrib_based_n_jobs,
         )
         print("Beta-Recall:", np.round(results["beta-recall"], 4))
 
-    if compute_distribution_based_authenticity:
+    if compute_distrib_based_authenticity:
         results["authenticity"] = authenticity(
             real_data=train_data,
             generated_data=generated_data,
-            n_jobs=distribution_based_n_jobs,
+            n_jobs=distrib_based_n_jobs,
         )
         print("Authenticity:", np.round(results["authenticity"], 4))
 
-    if compute_distribution_based_identifiability:
+    if compute_distrib_based_identifiability:
         results["identifiability"] = identifiability(
             real_data=train_data,
             reference_real_data=eval_data,
             generated_data=generated_data,
             reference_leaked_proportion=distrib_identif_ref_leaked_proportion,
-            n_jobs=distribution_based_n_jobs,
+            n_jobs=distrib_based_n_jobs,
         )
         print("Identifiability:", np.round(results["identifiability"], 4))
 
@@ -302,6 +315,8 @@ def main(
                         "beta-recall",
                         "authenticity",
                         "identifiability",
+                        "distance_score",
+                        "DCR_score",
                         "classification_baseline",
                         "GAN_train",
                         "GAN_test",
@@ -318,6 +333,8 @@ def main(
                     round_with_None(results["beta-recall"], 4),
                     round_with_None(results["authenticity"], 4),
                     round_with_None(results["identifiability"], 4),
+                    round_with_None(results["distance_score"], 4),
+                    round_with_None(results["DCR_score"], 4),
                     round_with_None(results["classification_baseline"], 4),
                     round_with_None(results["GAN_train"], 4),
                     round_with_None(results["GAN_test"], 4),
