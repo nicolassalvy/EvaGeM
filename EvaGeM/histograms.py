@@ -16,10 +16,8 @@ def histograms(
     dataset_name="Default_dataset_name",
     reusable_path=None,
 ):
-    """Computes and saves the histogram of the shortest distance between any
-    initial data point and other initial data points. Computes and saves the
-    histogram of the shortest distance between any generated data point and the
-    initial data points.
+    """Computes (and saves) the histogram of distances, the histogram of DCR
+        and computes their associated scores.
 
     Args:
         train_data (np.array): The training data.
