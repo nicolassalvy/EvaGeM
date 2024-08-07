@@ -15,6 +15,7 @@ def histograms(
     reusable_histogram_embedding=True,
     dataset_name="Default_dataset_name",
     reusable_path=None,
+    n_jobs=2,
 ):
     """Computes (and saves) the histogram of distances, the histogram of DCR
         and computes their associated scores.
@@ -48,6 +49,10 @@ def histograms(
         reusable_path (str, optional): Path to use for reusable
             computations. Needs to be provided if reusable is True. Defaults
             to None.
+
+        n_jobs (int, optional): The number of jobs to run in parallel. Defaults
+            to 2.
+
     """
     results = {
         "distance_score": None,
@@ -66,7 +71,7 @@ def histograms(
         test_data_neighbors = test_data.reshape(test_data.shape[0], -1)
 
     # Train the NearestNeighbors model on the real data
-    neighbors_train = NearestNeighbors(n_neighbors=2, n_jobs=-1).fit(
+    neighbors_train = NearestNeighbors(n_neighbors=2, n_jobs=n_jobs).fit(
         train_data_neighbors
     )  # Computed anyways because we need it for the generated data
 
@@ -114,7 +119,7 @@ def histograms(
 
     # Compute the histogram of the generated data to test
     if test_data is not None and compute_DCR:
-        neighbors_test = NearestNeighbors(n_neighbors=1, n_jobs=-1).fit(
+        neighbors_test = NearestNeighbors(n_neighbors=1, n_jobs=n_jobs).fit(
             test_data_neighbors
         )
         distances_test, _ = neighbors_test.kneighbors(generated_data_neighbors)

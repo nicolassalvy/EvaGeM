@@ -221,6 +221,7 @@ def main(
             reusable_histogram_embedding=reusable_embeddings,
             dataset_name=dataset_name,
             reusable_path=reusable_path,
+            n_jobs=distrib_based_n_jobs,
         )
         if compute_distrib_based_distance_histogram:
             results["distance_score"] = res_hist["distance_score"]
