@@ -18,7 +18,7 @@ from .distribution_based import (
 )
 
 
-def main(
+def evaluate_all(
     train_data,
     eval_data,
     test_data,
