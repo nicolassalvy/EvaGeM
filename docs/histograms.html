@@ -34,7 +34,7 @@ hljs.highlightAll();
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="EvaGeM.histograms.histograms"><code class="name flex">
-<span>def <span class="ident">histograms</span></span>(<span>train_data, generated_data, test_data=None, res_save_dir=None, experiment_name='Default_experiment_name', compute_distance_histogram=True, compute_DCR=True, reusable_histogram_embedding=True, dataset_name='Default_dataset_name', reusable_path=None)</span>
+<span>def <span class="ident">histograms</span></span>(<span>train_data, generated_data, test_data=None, res_save_dir=None, experiment_name='Default_experiment_name', compute_distance_histogram=True, compute_DCR=True, reusable_histogram_embedding=True, dataset_name='Default_dataset_name', reusable_path=None, n_jobs=2)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Computes (and saves) the histogram of distances, the histogram of DCR
@@ -76,6 +76,9 @@ reusable computations are used. Defaults to "Default_dataset_name".</dd>
 <dd>Path to use for reusable
 computations. Needs to be provided if reusable is True. Defaults
 to None.</dd>
+<dt><strong><code>n_jobs</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>The number of jobs to run in parallel. Defaults
+to 2.</dd>
 </dl></div>
 </dd>
 </dl>

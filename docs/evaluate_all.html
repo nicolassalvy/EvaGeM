@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.1">
-<title>EvaGeM.main API documentation</title>
+<title>EvaGeM.evaluate_all API documentation</title>
 <meta name="description" content="">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
@@ -22,7 +22,7 @@ hljs.highlightAll();
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>EvaGeM.main</code></h1>
+<h1 class="title">Module <code>EvaGeM.evaluate_all</code></h1>
 </header>
 <section id="section-intro">
 </section>
@@ -33,8 +33,8 @@ hljs.highlightAll();
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="EvaGeM.main.main"><code class="name flex">
-<span>def <span class="ident">main</span></span>(<span>train_data, eval_data, test_data, generated_data, train_labels=None, test_labels=None, generated_labels=None, classes=None, scaler=None, res_save_dir=None, experiment_name='Default_experiment_name', compute_UMAP_top=True, compute_UMAP_together=True, compute_UMAP_centroids=True, compute_distrib_based_alpha=True, compute_distrib_based_beta=True, compute_distrib_based_authenticity=False, compute_distrib_based_identifiability=True, compute_distrib_based_distance_histogram=True, compute_distrib_based_DCR=True, compute_classif_based_GAN_train=True, compute_classif_based_GAN_test=True, compute_classif_based_data_augmentation=True, compute_classif_based_discriminator=True, reusable_embeddings=True, reusable_classif_baseline=True, dataset_name='Default_dataset_name', reusable_path=None, UMAP_limit=2000, distrib_based_metrics_n_evaluated_points=50, distrib_identif_ref_leaked_proportion=0.05, distrib_based_n_jobs=2, classifiers=[&lt;class &#x27;sklearn.neural_network._multilayer_perceptron.MLPClassifier&#x27;&gt;, &lt;class &#x27;xgboost.sklearn.XGBClassifier&#x27;&gt;], classifier_params=[{'max_iter': 10}, {'n_estimators': 10}], classifiers_should_flatten=[True, True])</span>
+<dt id="EvaGeM.evaluate_all.evaluate_all"><code class="name flex">
+<span>def <span class="ident">evaluate_all</span></span>(<span>train_data, eval_data, test_data, generated_data, train_labels=None, test_labels=None, generated_labels=None, classes=None, scaler=None, res_save_dir=None, experiment_name='Default_experiment_name', compute_UMAP_top=True, compute_UMAP_together=True, compute_UMAP_centroids=True, compute_distrib_based_alpha=True, compute_distrib_based_beta=True, compute_distrib_based_authenticity=False, compute_distrib_based_identifiability=True, compute_distrib_based_distance_histogram=True, compute_distrib_based_DCR=True, compute_classif_based_GAN_train=True, compute_classif_based_GAN_test=True, compute_classif_based_data_augmentation=True, compute_classif_based_discriminator=True, reusable_embeddings=True, reusable_classif_baseline=True, dataset_name='Default_dataset_name', reusable_path=None, UMAP_limit=2000, distrib_based_metrics_n_evaluated_points=50, distrib_identif_ref_leaked_proportion=0.05, distrib_based_n_jobs=2, classifiers=[&lt;class &#x27;sklearn.neural_network._multilayer_perceptron.MLPClassifier&#x27;&gt;, &lt;class &#x27;xgboost.sklearn.XGBClassifier&#x27;&gt;], classifier_params=[{'max_iter': 10}, {'n_estimators': 10}], classifiers_should_flatten=[True, True])</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Evaluate the generated data.</p>
@@ -182,7 +182,7 @@ classifier. Defaults to [True, True].</dd>
 - data_augmentation (float): Data augmentation accuracy.
 - discriminator (float): Discriminator accuracy.</p></div>
 </dd>
-<dt id="EvaGeM.main.round_with_None"><code class="name flex">
+<dt id="EvaGeM.evaluate_all.round_with_None"><code class="name flex">
 <span>def <span class="ident">round_with_None</span></span>(<span>value, n)</span>
 </code></dt>
 <dd>
@@ -205,8 +205,8 @@ classifier. Defaults to [True, True].</dd>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="EvaGeM.main.main" href="#EvaGeM.main.main">main</a></code></li>
-<li><code><a title="EvaGeM.main.round_with_None" href="#EvaGeM.main.round_with_None">round_with_None</a></code></li>
+<li><code><a title="EvaGeM.evaluate_all.evaluate_all" href="#EvaGeM.evaluate_all.evaluate_all">evaluate_all</a></code></li>
+<li><code><a title="EvaGeM.evaluate_all.round_with_None" href="#EvaGeM.evaluate_all.round_with_None">round_with_None</a></code></li>
 </ul>
 </li>
 </ul>
