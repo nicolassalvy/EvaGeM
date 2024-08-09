@@ -135,11 +135,11 @@ def classification_scores(
         - discriminator (float): Accuracy of the discriminator classifier.
     """
     classification_results = {
-        "baseline": 0,
-        "GAN_train": 0,
-        "GAN_test": 0,
-        "DA": 0,
-        "discriminator": 0,
+        "baseline": None,
+        "GAN_train": None,
+        "GAN_test": None,
+        "DA": None,
+        "discriminator": None,
     }
 
     # Baseline

@@ -155,12 +155,10 @@ def histograms(
         plt.title("Shortest distances to the real data")
         plt.legend()
         if res_save_dir is not None:
-            plt.savefig(
-                res_save_dir
-                + "/"
-                + experiment_name
-                + "/histogram_distances.pdf"
-            )
+            save_path = res_save_dir + "/" + experiment_name
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            plt.savefig(save_path + "/histogram_distances.pdf")
         plt.show()
 
         distance_score = np.mean(distances_gen_to_train < distances_real)
@@ -216,8 +214,6 @@ def histograms(
         DCR_target = train_data.shape[0] / (
             train_data.shape[0] + test_data.shape[0]
         )
-        print("DCR score:", DCR_score)
-        print("DCR target:", DCR_target)
 
         results["DCR_score"] = 1 - np.abs(DCR_score - DCR_target) / (
             1 - DCR_target
