@@ -39,14 +39,14 @@ Please refer to `tutorial.ipynb` for detailed instructions on using the package.
 We evaluate 4 aspects of the generated data:
 - **Quality**: How well the generated data approximates the desired output.
 - **Coverage**: The extent to which the generated data covers the entire underlying data distribution.
-- **Conditionality**: The model's ability to produce samples belonging to specific classes or attributes.
+- **Conditioning**: The model's ability to produce samples belonging to specific classes or attributes.
 - **Generalisation**: The distinctiveness of the generated samples compared to the training data, discerning potential overfitting.
 
 ### List of Measures and their Evaluated aspects:
 
 #### Distribution based
 
-| Measure | Quality | Coverage | Generalisation | Conditionality |
+| Measure | Quality | Coverage | Generalisation | Conditioning |
 |:------- |:-------:|:--------:|:--------------:|:--------------:|
 | $\alpha$-Precision | :heavy_check_mark: | | | |
 | $\beta$-Recall | | :heavy_check_mark: | | |
@@ -69,7 +69,7 @@ Close to the histogram of distances, the histogram of **Distance to Closest Reco
 
 #### Classification based
 
-| Measure | Quality | Coverage | Generalisation | Conditionality |
+| Measure | Quality | Coverage | Generalisation | Conditioning |
 |:------- |:-------:|:--------:|:--------------:|:--------------:|
 | GAN-train | :heavy_check_mark: | :heavy_check_mark: | | :heavy_check_mark: |
 | GAN-test | | | :heavy_check_mark: | :heavy_check_mark: |
@@ -91,7 +91,7 @@ The **Discriminator accuracy score is obtained by training a classifier to disti
 
 #### UMAPs
 
-| Measure | Quality | Coverage | Generalisation | Conditionality |
+| Measure | Quality | Coverage | Generalisation | Conditioning |
 |:------- |:-------:|:--------:|:--------------:|:--------------:|
 | Generated on top | | :heavy_check_mark: | | |
 | Together | | :heavy_check_mark: | | |
