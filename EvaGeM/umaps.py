@@ -36,7 +36,7 @@ def prepare_plots(
 
     def filter_data(data, labels, limit):
         if labels is None:
-            index = np.random.shuffle(np.arange(data.shape[0]))
+            index = np.random.permutation(np.arange(data.shape[0]))
             return data[index[:limit]], None
 
         length_data = data.shape[0]
