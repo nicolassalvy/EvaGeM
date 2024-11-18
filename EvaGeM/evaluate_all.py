@@ -305,9 +305,8 @@ def evaluate_all(
         res_save_dir is not None
         and experiment_name != "Default_experiment_name"
     ):
-        save_path = res_save_dir + "/" + experiment_name
-        if not os.path.isfile(save_path + "/res.csv"):
-            with open(save_path + "/res.csv", "w") as f:
+        if not os.path.isfile(res_save_dir + "/res.csv"):
+            with open(res_save_dir + "/res.csv", "w") as f:
                 wr = csv.writer(f)
                 wr.writerow(
                     [
@@ -325,7 +324,7 @@ def evaluate_all(
                         "discriminator",
                     ]
                 )
-        with open(save_path + "/res.csv", "a", newline="") as f:
+        with open(res_save_dir + "/res.csv", "a", newline="") as f:
             wr = csv.writer(f)
             wr.writerow(
                 [
