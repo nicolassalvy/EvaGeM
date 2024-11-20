@@ -20,7 +20,6 @@ from .distribution_based import (
 
 def evaluate_all(
     train_data,
-    eval_data,
     test_data,
     generated_data,
     train_labels=None,
@@ -60,7 +59,6 @@ def evaluate_all(
 
     Args:
         train_data (np.array): The training data.
-        eval_data (np.array): The evaluation data.
         test_data (np.array): The test data.
         generated_data (np.array): The generated data.
 
@@ -259,7 +257,7 @@ def evaluate_all(
     if compute_distrib_based_identifiability:
         results["identifiability"] = identifiability(
             real_data=train_data,
-            reference_real_data=eval_data,
+            reference_real_data=test_data,
             generated_data=generated_data,
             reference_leaked_proportion=distrib_identif_ref_leaked_proportion,
             n_jobs=distrib_based_n_jobs,

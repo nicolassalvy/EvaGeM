@@ -31,7 +31,7 @@ Please refer to `tutorial.ipynb` for detailed instructions on using the package.
 ### General guidelines:
 - **Standardize your data**: Your data should be standardized or preprocessed in the same way it was given to your generative model. Otherwise, the metrics might be biased.
 
-- **Data splitting**: Split your real data in a training, evaluation and test dataset. The generative model should have never seen the test dataset. There should be as much data in the train and generated datasets. The evaluation dataset is only used as a reference dataset for the identifiability metric.
+- **Data splitting**: Split your real data into a training and test dataset. The generative model should have never seen the test dataset. There should be as much data in the train and generated datasets.
 
 
 ## Metrics
