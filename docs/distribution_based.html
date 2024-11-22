@@ -71,16 +71,27 @@ The true proportion of inliers in the base_data.</dd>
 </dl></div>
 </dd>
 <dt id="EvaGeM.distribution_based.alpha_precision"><code class="name flex">
-<span>def <span class="ident">alpha_precision</span></span>(<span>real_data, generated_data, number_of_alphas=50, n_jobs=2)</span>
+<span>def <span class="ident">alpha_precision</span></span>(<span>train_data, generated_data, res_save_dir=None, experiment_name='Default_experiment_name', plot_curve=True, number_of_alphas=50, n_jobs=2)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Compute the Alpha-Precision score. THE DATA SHOULD BE STANDARDIZED!</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>real_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
-<dd>The real data.</dd>
+<dt><strong><code>train_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>The training data.</dd>
 <dt><strong><code>generated_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
 <dd>The generated data.</dd>
+<dt><strong><code>res_save_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Path of the directory where the results
+will be saved. If it is not provided, the results are printed and
+returned but not saved. Defaults to None.</dd>
+<dt><strong><code>experiment_name</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Name of the experiment. Used to save
+the results of different experiments in the same csv file.
+Defaults to "Default_experiment_name".</dd>
+<dt><strong><code>plot_curve</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If True, the curve of Alpha-Precision is
+plotted. Defaults to True.</dd>
 <dt><strong><code>number_of_alphas</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>The number of alpha values to test.
 Defaults to 50.</dd>
@@ -116,16 +127,27 @@ to 2.</dd>
 </dl></div>
 </dd>
 <dt id="EvaGeM.distribution_based.beta_recall"><code class="name flex">
-<span>def <span class="ident">beta_recall</span></span>(<span>real_data, generated_data, number_of_betas=50, n_jobs=2)</span>
+<span>def <span class="ident">beta_recall</span></span>(<span>train_data, generated_data, res_save_dir=None, experiment_name='Default_experiment_name', plot_curve=True, number_of_betas=50, n_jobs=2)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Compute the Beta-Recall score. THE DATA SHOULD BE STANDARDIZED!</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>real_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dt><strong><code>train_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
 <dd>The real data.</dd>
 <dt><strong><code>generated_data</code></strong> :&ensp;<code>np.ndarray</code></dt>
 <dd>The generated data.</dd>
+<dt><strong><code>res_save_dir</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Path of the directory where the results
+will be saved. If it is not provided, the results are printed and
+returned but not saved. Defaults to None.</dd>
+<dt><strong><code>experiment_name</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Name of the experiment. Used to save
+the results of different experiments in the same csv file.
+Defaults to "Default_experiment_name".</dd>
+<dt><strong><code>plot_curve</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If True, the curve of the Beta-Recall is
+plotted. Defaults to True.</dd>
 <dt><strong><code>number_of_betas</code></strong> :&ensp;<code>int</code>, optional</dt>
 <dd>The number of beta values to test.
 Defaults to 50.</dd>
