@@ -47,6 +47,7 @@ def evaluate_all(
     dataset_name="Default_dataset_name",
     reusable_path=None,
     UMAP_limit=2000,
+    distrib_based_metrics_plot_curve=True,
     distrib_based_metrics_n_evaluated_points=50,
     distrib_identif_ref_leaked_proportion=0.05,
     distrib_based_n_jobs=2,
@@ -159,12 +160,15 @@ def evaluate_all(
             classifier. Defaults to [True, True].
 
     Returns: dict: A dictionnary with the following keys:
-        - Min (float): Min of the generated data.
-        - Max (float): Max of the generated data.
-        - DPA (float): Alpha-Precision metric.
-        - DCB (float): Beta-Recall metric.
+        - alpha-precision (float): Alpha-Precision metric.
+        - beta-recall (float): Beta-Recall metric.
         - authenticity (float): Authenticity metric.
         - identifiability (float): Identifiability metric.
+        - distance_score (float): Distance score.
+        - DCR_score (float): DCR score.
+        - train_proportion (float): The train proportion to which the DCR score
+            should be compared.
+        - classification_baseline (float): Classification baseline accuracy.
         - GAN_train (float): GAN train accuracy.
         - GAN_test (float): GAN test accuracy.
         - data_augmentation (float): Data augmentation accuracy.
@@ -177,6 +181,7 @@ def evaluate_all(
         "identifiability": None,
         "distance_score": None,
         "DCR_score": None,
+        "train_proportion": None,
         "classification_baseline": None,
         "GAN_train": None,
         "GAN_test": None,
@@ -223,28 +228,32 @@ def evaluate_all(
         )
         if compute_distrib_based_distance_histogram:
             results["distance_score"] = res_hist["distance_score"]
-            print("Distance score:", np.round(results["distance_score"], 4))
+
         if compute_distrib_based_DCR:
             results["DCR_score"] = res_hist["DCR_score"]
-            print("DCR score:", np.round(results["DCR_score"], 4))
+            results["train_proportion"] = res_hist["train_proportion"]
 
     if compute_distrib_based_alpha:
         results["alpha-precision"] = alpha_precision(
-            real_data=train_data,
+            train_data=train_data,
             generated_data=generated_data,
+            res_save_dir=res_save_dir,
+            experiment_name=experiment_name,
+            plot_curve=distrib_based_metrics_plot_curve,
             number_of_alphas=distrib_based_metrics_n_evaluated_points,
             n_jobs=distrib_based_n_jobs,
         )
-        print("Alpha-Precision:", np.round(results["alpha-precision"], 4))
 
     if compute_distrib_based_beta:
         results["beta-recall"] = beta_recall(
-            real_data=train_data,
+            train_data=train_data,
             generated_data=generated_data,
+            res_save_dir=res_save_dir,
+            experiment_name=experiment_name,
+            plot_curve=distrib_based_metrics_plot_curve,
             number_of_betas=distrib_based_metrics_n_evaluated_points,
             n_jobs=distrib_based_n_jobs,
         )
-        print("Beta-Recall:", np.round(results["beta-recall"], 4))
 
     if compute_distrib_based_authenticity:
         results["authenticity"] = authenticity(
@@ -252,7 +261,6 @@ def evaluate_all(
             generated_data=generated_data,
             n_jobs=distrib_based_n_jobs,
         )
-        print("Authenticity:", np.round(results["authenticity"], 4))
 
     if compute_distrib_based_identifiability:
         results["identifiability"] = identifiability(
@@ -262,7 +270,6 @@ def evaluate_all(
             reference_leaked_proportion=distrib_identif_ref_leaked_proportion,
             n_jobs=distrib_based_n_jobs,
         )
-        print("Identifiability:", np.round(results["identifiability"], 4))
 
     if (
         (
@@ -315,6 +322,7 @@ def evaluate_all(
                         "identifiability",
                         "distance_score",
                         "DCR_score",
+                        "train_proportion",
                         "classification_baseline",
                         "GAN_train",
                         "GAN_test",
@@ -333,6 +341,7 @@ def evaluate_all(
                     round_with_None(results["identifiability"], 4),
                     round_with_None(results["distance_score"], 4),
                     round_with_None(results["DCR_score"], 4),
+                    round_with_None(results["train_proportion"], 4),
                     round_with_None(results["classification_baseline"], 4),
                     round_with_None(results["GAN_train"], 4),
                     round_with_None(results["GAN_test"], 4),
