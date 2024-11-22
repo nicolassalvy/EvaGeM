@@ -1,7 +1,9 @@
+import os
 import numpy as np
 from sklearn.kernel_approximation import Nystroem
 from sklearn.linear_model import SGDOneClassSVM
 from sklearn.neighbors import NearestNeighbors
+import matplotlib.pyplot as plt
 
 
 # All n_jobs=-1 were removed because it does not work on some systems
@@ -113,18 +115,32 @@ def compute_integral(
 
 
 def alpha_precision(
-    real_data,
+    train_data,
     generated_data,
+    res_save_dir=None,
+    experiment_name="Default_experiment_name",
+    plot_curve=True,
     number_of_alphas=50,
     n_jobs=2,
 ):
     """Compute the Alpha-Precision score. THE DATA SHOULD BE STANDARDIZED!
 
     Args:
-        real_data (np.ndarray): The real data.
+        train_data (np.ndarray): The training data.
         generated_data (np.ndarray): The generated data.
+
+        res_save_dir (str, optional): Path of the directory where the results
+            will be saved. If it is not provided, the results are printed and
+            returned but not saved. Defaults to None.
+        experiment_name (str, optional): Name of the experiment. Used to save
+            the results of different experiments in the same csv file.
+            Defaults to "Default_experiment_name".
+
+        plot_curve (bool, optional): If True, the curve of Alpha-Precision is
+            plotted. Defaults to True.
         number_of_alphas (int, optional): The number of alpha values to test.
             Defaults to 50.
+
         n_jobs (int, optional): The number of jobs to run in parallel. Defaults
             to 2.
 
@@ -137,7 +153,7 @@ def alpha_precision(
     nus = 1 - alphas  # how many can be outliers = 1 - proportion of inliers
 
     alpha_precision_curve, true_alphas = OCSVM_scores(
-        base_data=real_data,
+        base_data=train_data,
         data_to_test=generated_data,
         nus=nus,
         n_jobs=n_jobs,
@@ -146,23 +162,53 @@ def alpha_precision(
     Delta_Precision_Alpha = compute_integral(
         alpha_precision_curve, true_alphas
     )
+
+    if plot_curve:
+        plt.figure(figsize=(5, 4), dpi=120)
+        plt.plot(true_alphas, alpha_precision_curve, marker="o")
+        plt.xlabel("True proportion of training inliers")
+        plt.ylabel("Proportion of generated inliers")
+        plt.title("Alpha-Precision curve")
+        plt.plot([0, 1], [0, 1], "--", color="black")
+        if res_save_dir is not None:
+            save_path = res_save_dir + "/" + experiment_name
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            plt.savefig(save_path + "/alpha_precision_curve.pdf")
+        plt.show()
+
     IPAlpha = 1 - 2 * Delta_Precision_Alpha
+    print("Alpha-Precision:", np.round(IPAlpha, 4))
     return IPAlpha
 
 
 def beta_recall(
-    real_data,
+    train_data,
     generated_data,
+    res_save_dir=None,
+    experiment_name="Default_experiment_name",
+    plot_curve=True,
     number_of_betas=50,
     n_jobs=2,
 ):
     """Compute the Beta-Recall score. THE DATA SHOULD BE STANDARDIZED!
 
     Args:
-        real_data (np.ndarray): The real data.
+        train_data (np.ndarray): The real data.
         generated_data (np.ndarray): The generated data.
+
+        res_save_dir (str, optional): Path of the directory where the results
+            will be saved. If it is not provided, the results are printed and
+            returned but not saved. Defaults to None.
+        experiment_name (str, optional): Name of the experiment. Used to save
+            the results of different experiments in the same csv file.
+            Defaults to "Default_experiment_name".
+
+        plot_curve (bool, optional): If True, the curve of the Beta-Recall is
+            plotted. Defaults to True.
         number_of_betas (int, optional): The number of beta values to test.
             Defaults to 50.
+
         n_jobs (int, optional): The number of jobs to run in parallel. Defaults
             to 2.
 
@@ -177,13 +223,29 @@ def beta_recall(
 
     beta_coverage_curve, true_betas = OCSVM_scores(
         base_data=generated_data,
-        data_to_test=real_data,
+        data_to_test=train_data,
         nus=nus,
         n_jobs=n_jobs,
     )
 
     Delta_Coverage_Beta = compute_integral(beta_coverage_curve, true_betas)
+
+    if plot_curve:
+        plt.figure(figsize=(5, 4), dpi=120)
+        plt.plot(true_betas, beta_coverage_curve, marker="o")
+        plt.xlabel("True proportion of generated inliers")
+        plt.ylabel("Proportion of training inliers")
+        plt.title("Beta-Recall curve")
+        plt.plot([0, 1], [0, 1], "--", color="black")
+        if res_save_dir is not None:
+            save_path = res_save_dir + "/" + experiment_name
+            if not os.path.exists(save_path):
+                os.makedirs(save_path)
+            plt.savefig(save_path + "/beta_recall_curve.pdf")
+        plt.show()
+
     IRBeta = 1 - 2 * Delta_Coverage_Beta
+    print("Beta-Recall:", np.round(IRBeta, 4))
     return IRBeta
 
 
@@ -225,7 +287,9 @@ def authenticity(
     # [:, 0] because the closest is NOT the point itself --> not the same data
 
     authenticity = distances_generated_to_real > distances_real_to_real
-    return authenticity.sum() / authenticity.size
+    authenticity = authenticity.sum() / authenticity.size
+    print("Authenticity:", np.round(authenticity, 4))
+    return authenticity
 
 
 def identifiability(
@@ -319,6 +383,7 @@ def identifiability(
     # real_data? (Multiplied by the ratio from the reference dataset)
     identifiability = distances_real_to_gen < r * distances_real
     identifiability = identifiability.sum() / identifiability.size
+    print("Identifiability:", np.round(identifiability, 4))
 
     if filter_leaky_generated:
         # We remove the generated points that are too close to the real data

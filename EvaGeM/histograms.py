@@ -57,6 +57,7 @@ def histograms(
     results = {
         "distance_score": None,
         "DCR_score": None,
+        "train_proportion": None,
     }
     if not compute_distance_histogram and not compute_DCR:
         print("No computation to do.")
@@ -165,13 +166,13 @@ def histograms(
         # Probability that a training point is closer to a generated point
         # than another training point
         # This should be close to #Generated / (#Generated + #Train)
-        distance_target = generated_data.shape[0] / (
-            generated_data.shape[0] + train_data.shape[0]
+        results["distance_score"] = distance_score
+        print(
+            "Distance score:",
+            np.round(distance_score, 4),
+            "(proportion of training points closer to the generated set than",
+            "to the training set)",
         )
-
-        results["distance_score"] = 1 - np.abs(
-            distance_score - distance_target
-        ) / (1 - distance_target)
 
     if compute_DCR:
         plt.figure(figsize=(5, 4), dpi=120)
@@ -211,12 +212,19 @@ def histograms(
         # Probability that a generated point is closer to the training data
         # than a holdout point
         # This should be close to #Train / (#Train + #Holdout)
-        DCR_target = train_data.shape[0] / (
+        results["DCR_score"] = DCR_score
+        train_proportion = train_data.shape[0] / (
             train_data.shape[0] + test_data.shape[0]
         )
-
-        results["DCR_score"] = 1 - np.abs(DCR_score - DCR_target) / (
-            1 - DCR_target
+        results["train_proportion"] = train_proportion
+        print(
+            "DCR score:",
+            np.round(DCR_score, 4),
+            "(proportion of generated points closer to the training set than",
+            "to the test set)",
+            "to compare with:",
+            np.round(train_proportion, 4),
+            "the proportion of training points in the whole real dataset.",
         )
 
     return results
