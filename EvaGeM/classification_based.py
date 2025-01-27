@@ -144,8 +144,10 @@ def classification_scores(
 
     # Baseline
     if (
-        compute_GAN_train or compute_GAN_test or compute_data_augmentation
-    ) and train_labels is not None:
+        (compute_GAN_train or compute_GAN_test or compute_data_augmentation)
+        and train_labels is not None
+        and generated_labels is not None
+    ):
         print("Training the baseline...")
         reusable = (
             reusable_baseline
@@ -190,7 +192,11 @@ def classification_scores(
         )
 
     # GAN train
-    if compute_GAN_train and train_labels is not None:
+    if (
+        compute_GAN_train
+        and train_labels is not None
+        and generated_labels is not None
+    ):
         print("Training the GAN-train classifier...")
         classification_results["GAN_train"] = train_classifier(
             data=generated_data,
@@ -204,7 +210,11 @@ def classification_scores(
         print("GAN-train accuracy:", classification_results["GAN_train"])
 
     # GAN test
-    if compute_GAN_test and train_labels is not None:
+    if (
+        compute_GAN_test
+        and train_labels is not None
+        and generated_labels is not None
+    ):
         print("Training the GAN-test classifier.")
         classification_results["GAN_test"] = train_classifier(
             data=train_data,
@@ -262,7 +272,11 @@ def classification_scores(
         )
 
     # Data augmentation
-    if compute_data_augmentation and train_labels is not None:
+    if (
+        compute_data_augmentation
+        and train_labels is not None
+        and generated_labels is not None
+    ):
         print("Training the data augmentation classifier...")
         classification_results["DA"] = train_classifier(
             data=np.concatenate([train_data, generated_data]),
