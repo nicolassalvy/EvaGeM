@@ -249,7 +249,11 @@ def plot_umap(
     plt.show()
 
     # Centroids
-    if compute_UMAP_centroids:
+    if (
+        compute_UMAP_centroids
+        and train_labels_to_plot is not None
+        and gen_labels_to_plot is not None
+    ):
         if train_data_to_plot is not None:  # more than one real class
             classes_labels = np.unique(train_labels_to_plot)
 
